@@ -15,5 +15,6 @@ bash <(curl -s https://raw.githubusercontent.com/Ogglord/dot-stow/main/install.s
 ```
 
 **dot works on Linux, Windows (within WSL) & MacOS**
+
 **the install script works for Debian based distros only, such as Ubuntu**
 
