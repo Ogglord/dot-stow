@@ -674,9 +674,9 @@ self_update() {
     local INSTALLPATH="$HOME/.local/share/dot"
     pushd "$INSTALLPATH" > /dev/null || die "Could not install dir: $INSTALLPATH"
 
-    timeout 1s git fetch --quiet
+    timeout 2s git fetch --quiet
 
-    timeout 1s git diff --quiet --exit-code "origin/main" "dot.sh"
+    timeout 2s git diff --quiet --exit-code "origin/main" "dot"
     [ $? -eq 1 ] && {
         debug "Found a new version of dot, updating..."
         git pull --force --quiet
@@ -687,7 +687,7 @@ self_update() {
         #exec "$SCRIPTNAME" "$@"
 
         # Now exit this old instance
-        exit 1
+        die "Update complete!"
     }
     msg "${GREEN}dot${NOFORMAT} is already up-to-date"
 }
