@@ -1,2 +1,1 @@
-## ignore the symlink for dot.sh that is created by install.sh
-dot
+# no need to ignore anything, yet
