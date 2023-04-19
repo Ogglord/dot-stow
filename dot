@@ -443,7 +443,7 @@ add()
 restow_single()
 {
   #echo "stow -R -n --dir=${dotfiles_dir} --target=${target_dir} -S ${1} "
-  ${stowcmd} -R --dir=${dotfiles_dir} --target=${target_dir} -S ${1} > /dev/null && msg2 "$1" "${GREEN}Updated${NOFORMAT}" || msg2 "$1" "Failed"
+  ${stowcmd} -R --dir=${dotfiles_dir} --target=${target_dir} -S ${1} > /dev/null && msg2 "\t$1" "${GREEN}Updated${NOFORMAT}" || msg2 "$1" "Failed"
   sleep 0.1
 }
 
