@@ -44,9 +44,6 @@ main() {
     ## install dot
     git clone -b "${BRANCH:-main}" "${GIT_URL}" "$DOT_DIR" > /dev/null 2>&1 || { echo "❌ Failed to install dot" && return 2 ; }
     
-    ## symlink dot -> dot.sh
-    ln -sfr "${DOT_DIR}/dot.sh" "${DOT_DIR}/dot"
-
     ## log installed revision (for future update checks)
     REVISION=$( cd "$DOT_DIR" && git rev-parse origin/main )
 
