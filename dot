@@ -150,6 +150,7 @@ print_help()
   printf '\t %s   \t%s\n' "push" "Commit and push local changes to git"
   printf '\t %s   \t%s\n' "restow" "Update symlinks using stow. E.g. dot restow <package-1> ... <package-n>"  
   printf '\t %s   \t%s\n' "status" "Shows git status for the dotfiles"  
+  printf '\t %s   \t%s\n' "update" "Run self updater for dot"
   printf "\n"
   printf '\t%s\n' "<arg>: Files/Directories or Packages to process"
   printf '\t%s\n' "-n, --dry-run, --no-dry-run: Do not write changes to disk/git (off by default)"
@@ -668,6 +669,29 @@ sync()
 
 }
 
+self_update() {
+    debug "${GREEN}Checking for newer version of dot...${NOFORMAT}"
+    local INSTALLPATH="$HOME/.local/share/dot"
+    pushd "$INSTALLPATH" > /dev/null || die "Could not install dir: $INSTALLPATH"
+
+    timeout 1s git fetch --quiet
+
+    timeout 1s git diff --quiet --exit-code "origin/main" "dot.sh"
+    [ $? -eq 1 ] && {
+        debug "Found a new version of dot, updating..."
+        git pull --force --quiet
+        git checkout main --quiet
+        git pull --force --quiet
+        msg "${GREEN}dot${NOFORMAT} has been updated"
+        popd > /dev/null || echo
+        #exec "$SCRIPTNAME" "$@"
+
+        # Now exit this old instance
+        exit 1
+    }
+    msg "${GREEN}dot${NOFORMAT} is already up-to-date"
+}
+
 ### Enter dotfiles directory by default
 pushd "$dotfiles_dir" > /dev/null || die "Could not change directory"
 
@@ -696,7 +720,11 @@ case $_arg_command in
 
   status)
     git_sync "${git_remote}/${git_branch}" "ONLY_STATUS"
-    ;;      
+    ;;
+
+  update)
+    self_update
+    ;;     
 
   help)
     exit 0

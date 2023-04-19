@@ -7,13 +7,14 @@
 ### Custom install
 ## CONFIG_DIR="${HOME}" install.sh --branch [<branch_name>]
 
+GIT_URL="https://github.com/Ogglord/dot-stow.git"
+DOT_DIR="$HOME/.local/share/dot"
+
 main() {
 
     local DATE=$(date +%Y-%m-%d)
     local ID=$(date +%s)
-    local DOT_DIR="$HOME/.local/share/dot"
-    local DOT_CONFIG_DIR="${CONFIG_DIR:-$HOME}/.config/dot"
-    local GIT_URL="https://github.com/Ogglord/dot-stow.git"
+    local DOT_CONFIG_DIR="${CONFIG_DIR:-$HOME}/.config/dot"    
     local CONFIG_FILE="$DOT_CONFIG_DIR/dot.config"
 
     echo "Installing dot ($DATE)..."
