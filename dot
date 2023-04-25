@@ -331,8 +331,13 @@ _print_indent=""
 ###################
 
 
-
-
+## usage if isSubPath "/root" "/folder/to/test" ;then ...
+isSubPath() {
+  if [[ $(realpath --relative-base="$1" -- "$2")  =~ ^/ ]]
+    then return 1 # false
+    else return 0 # true
+  fi
+}
 get_path_rel_caller()
 {
   # check if absolute or relative to calling_dir
@@ -364,7 +369,7 @@ get_path_rel_package()
    _pkg_root="$1"
    _original_dir="$(dirname "$2")"
    _stow_filename="$(basename "$2")"
-   _package_path=$(realpath --relative-base="${target_dir}" "${_original_dir}")   
+   _package_path=$(realpath --relative-base="${target_dir}" "${_original_dir}")
    _stow_dir="${_pkg_root}/${_package_path}"
 
    ## make sure dir exists
@@ -394,8 +399,16 @@ add()
   for file_arg in "${_arg_arg[@]}"; do
     file_path=$(get_path_rel_caller "$file_arg")
     if [ -f "${file_path}" ]; then
-      msg2 "${file_path}" "OK"
-      valid_paths+=( "$file_path" )
+      
+      ## make sure the file is not under .dotfiles path
+      if isSubPath $dotfiles_dir $file_path ; then
+        ## error
+          msg2 "${file_path}" "${RED}Cannot stow file in .dotfiles"
+        else
+          msg2 "${file_path}" "OK"
+          valid_paths+=( "$file_path" )
+      fi
+     
     else
       msg2 "${file_path}" "${RED}NOT FOUND"
       all_found=0
