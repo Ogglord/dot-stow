@@ -85,7 +85,7 @@ load_config(){
     local DOT_CONFIG_DIR="${DOT_CONFIG_DIR:-$HOME/.config/dot}"
     export DOT_CONFIG_FILE="$DOT_CONFIG_DIR/dot.config"
     debug "Config: $DOT_CONFIG_FILE"
-    [[ ! -f "$DOT_CONFIG_FILE" ]] && msg "${RED}Config file is missing, re-run \`install.sh\`?${NOFORMAT}"
+    [[ ! -f "$DOT_CONFIG_FILE" ]] && die "Config file is missing, re-run \`install.sh\`?"
     ## loading each key
     git_remote=$(read_config_variable "git.dotfiles.remote" "origin")    
     git_branch=$(read_config_variable "git.dotfiles.branch" "main")
@@ -617,11 +617,11 @@ push()
   #has_changes=$(commit_changes)
 
   #if [[ $has_changes -eq 1 ]]; then
-  msg "Pushing ${git_remote} ${git_branch}... (${_arg_arg[*]-auto commit})..."
+  print "Pushing ${git_remote} ${git_branch}... (${_arg_arg[*]-auto commit})..."
   git push "${git_remote}" "${git_branch}" --quiet
   debug "push done"
   #else
-  #  msg "No changes to push"
+  #  print "No changes to push"
   #fi
 
 }
