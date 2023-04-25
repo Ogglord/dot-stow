@@ -146,7 +146,7 @@ print_help()
   printf '%s\n' "Helps move, and stow dotfiles using GNU Stow and push/pull changes to git."
   printf '%s\n' "Use with caution."
   printf 'Usage: %s [-n|--(no-)dry-run] [-f|--(no-)force] [-v|--(no-)verbose] [-p|--package <package_name>] [-h|--help] [-V|--version] [--] <command> [<arg-1>]...[<arg-n>]\n' 'dot' #"$0"
-  printf '\t%s\n' "<command>: Which command to execute"
+  printf '\t%s\n' "List of valid commands:"
   printf '\t %s   \t%s\n' "add " "Move file(s) specified in <arg-n> to stow package --package/-p <package_name>"
   printf '\t %s   \t%s\n' "sync" "Performs push, pull and restow to make sure local and remote are synced"
   printf '\t %s   \t%s\n' "pull" "Pull changes from git"
