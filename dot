@@ -11,7 +11,7 @@ trap cleanup EXIT
 ## dot specific functions
 print_version(){
   local INSTALLPATH="$HOME/.local/share/dot"
-  echo "$(basename $0) (dot by Ogglord) v0.1"
+  echo -e "${GREEN}$(basename $0)${NOFORMAT} (dot by Ogglord) v0.1"
   echo "rev: $(cat $INSTALLPATH/.git/refs/heads/${git_branch:-main})"
 }
 
