@@ -112,7 +112,7 @@ die()
 {
   local _ret="${2:-1}"
   test "${_PRINT_HELP:-no}" = yes && print_help >&2
-  err "$1"
+  [[ -n ${1} ]] && err "$1"
   exit "${_ret}"
 }
 
