@@ -701,7 +701,6 @@ self_update() {
         git pull --force --quiet
         success "dot has been updated!"
         popd > /dev/null || echo
-        #exec "$SCRIPTNAME" "$@"
 
         # Now exit this old instance
         die "" 0
