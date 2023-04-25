@@ -151,9 +151,9 @@ print_help()
   printf '\t %s   \t%s\n' "sync" "Performs push, pull and restow to make sure local and remote are synced"
   printf '\t %s   \t%s\n' "pull" "Pull changes from git"
   printf '\t %s   \t%s\n' "push" "Commit and push local changes to git"
-  printf '\t %s   \t%s\n' "restow" "Re-create all symlinks.(Usage: \´dot restow <package-1> ... <package-n>\´)"  
+  printf '\t %s   \t%s\n' "restow" "Re-create all symlinks. Usage: ´dot restow <package-1> ... <package-n>´"  
   printf '\t %s   \t%s\n' "status" "Shows git status for the dotfiles"  
-  printf '\t %s   \t%s\n' "reset" "Removes all symlinks" 
+  printf '\t %s   \t%s\n' "reset" "Remove all symlinks" 
   printf '\t %s   \t%s\n' "update" "Run self updater for dot"
   printf "\n"
   printf '\t%s\n' "<arg>: Files/Directories or Packages to process"
@@ -753,7 +753,7 @@ case $_arg_command in
     ;;   
 
   help)
-    exit 0
+    _PRINT_HELP=yes die "" 0;
     ;;     
 
   *)
