@@ -9,6 +9,10 @@ trap cleanup EXIT
 
 
 ## dot specific functions
+print_version(){
+  echo "$(basename $0) (dot by Ogglord) v0.1"
+}
+
 setup_colors() {
   if [[ -t 2 ]] && [[ -z "${NO_COLOR-}" ]] && [[ "${TERM-}" != "dumb" ]]; then
     NOFORMAT="\e[0m" RED="\e[91m" GREEN="\e[92m" ORANGE="\e[93m" YELLOW="\e[96m"
@@ -106,7 +110,7 @@ die()
 {
   local _ret="${2:-1}"
   test "${_PRINT_HELP:-no}" = yes && print_help >&2
-  err -e "${RED}$1${NOFORMAT}" >&2
+  err "$1"
   exit "${_ret}"
 }
 
@@ -261,7 +265,7 @@ parse_commandline()
         ;;
       # See the comment of option '--dry-run' to see what's going on here - principle is the same.
       -V|--version)
-        echo "$(basename $0) (dot by Ogglord) v0.1"
+        print_version
         exit 0
         ;;
       # See the comment of option '-n' to see what's going on here - principle is the same.
@@ -737,6 +741,10 @@ case $_arg_command in
   update)
     self_update
     ;;     
+
+  version)
+    print_version
+    ;;   
 
   help)
     exit 0
