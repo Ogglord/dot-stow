@@ -632,7 +632,7 @@ pull()
   debug "PULL_MODE: ${PULL_MODE}"
   #commit_changes
 
-  debug "${BLUE}Stashing existing changes..."
+  debug "Stashing existing changes..."
   stash_result=$(git stash push -m "dot: Before pulling git")
   needs_pop=1
   if [ "$stash_result" = "No local changes to save" ]; then
@@ -651,14 +651,13 @@ pull()
   fi
 
   if [[ $needs_pop -eq 1 ]]; then
-      debug "${BLUE}There are local changes, stashing them...${NOFORMAT}"
+      debug "There are local changes, stashing them..."
       git stash pop --quiet
   fi
 
   unmerged_files=$(git diff --name-only --diff-filter=U)
   if [[ -n $unmerged_files ]]; then
-    err "${RED}The following files have merge conflicts after popping the stash: ${NOFORMAT}"
-    echo
+    err "The following files have merge conflicts after popping the stash:"
     printf %"s\n" "$unmerged_files"  # Ensure newlines are printed
   fi 
 
@@ -705,7 +704,7 @@ self_update() {
         #exec "$SCRIPTNAME" "$@"
 
         # Now exit this old instance
-        die "Update complete!"
+        die "" 0
     }
     print "dot is already up-to-date"
 }
