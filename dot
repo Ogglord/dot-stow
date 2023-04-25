@@ -324,6 +324,7 @@ assign_positional_args()
     eval "$_positional_name=\${1}" || die "Error during argument parsing, possibly an Argbash bug." 1
     shift
   done
+  
 }
 
 # Now call all the functions defined above that are needed to get the job done
