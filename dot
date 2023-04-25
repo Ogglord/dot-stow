@@ -12,7 +12,7 @@ trap cleanup EXIT
 print_version(){
   local INSTALLPATH="$HOME/.local/share/dot"
   echo "$(basename $0) (dot by Ogglord) v0.1"
-  echo "Rev: $(cat $INSTALLPATH/.git/refs/heads/${git_branch:-main})"
+  echo "rev: $(cat $INSTALLPATH/.git/refs/heads/${git_branch:-main})"
 }
 
 setup_colors() {
