@@ -415,7 +415,8 @@ add()
     fi
   done
   [[ $all_found -eq 0 ]] && die "Not all files were found, check paths!"
-  
+  [[ "${#valid_paths[@]}" -eq 0 ]] && { msg "No files to stow" || return 0 ;}
+
   msg ""
   msg "Moving files to stow repository: ${package_root}"
   msg ""
