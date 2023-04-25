@@ -148,11 +148,12 @@ print_help()
   printf 'Usage: %s [-n|--(no-)dry-run] [-f|--(no-)force] [-v|--(no-)verbose] [-p|--package <package_name>] [-h|--help] [-V|--version] [--] <command> [<arg-1>] ... [<arg-n>] ...\n' "$0"
   printf '\t%s\n' "<command>: Which command to execute"
   printf '\t %s   \t%s\n' "add " "Move file(s) specified in <arg-n> to stow package --package/-p <package_name>"
-  printf '\t %s   \t%s\n' "sync" "Performs local commit=>pull=>push=>restow to make sure local and remote are up-to-date"
+  printf '\t %s   \t%s\n' "sync" "Performs push, pull and restow to make sure local and remote are synced"
   printf '\t %s   \t%s\n' "pull" "Pull changes from git"
   printf '\t %s   \t%s\n' "push" "Commit and push local changes to git"
-  printf '\t %s   \t%s\n' "restow" "Update symlinks using stow. E.g. dot restow <package-1> ... <package-n>"  
+  printf '\t %s   \t%s\n' "restow" "Re-create all symlinks.(Usage: \´dot restow <package-1> ... <package-n>\´)"  
   printf '\t %s   \t%s\n' "status" "Shows git status for the dotfiles"  
+  printf '\t %s   \t%s\n' "reset" "Removes all symlinks" 
   printf '\t %s   \t%s\n' "update" "Run self updater for dot"
   printf "\n"
   printf '\t%s\n' "<arg>: Files/Directories or Packages to process"
@@ -734,6 +735,10 @@ case $_arg_command in
   restow)
     restow
     ;;  
+
+  reset)
+    reset
+    ;; 
 
   status)
     git_sync "${git_remote}/${git_branch}" "ONLY_STATUS"
